@@ -1,7 +1,6 @@
 import typer
 import datetime
 import random
-import os
 import re
 from pathlib import Path
 
