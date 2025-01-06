@@ -48,9 +48,31 @@ def add_or_update_front_matter(content, file_id):
 def process_markdown_files(root_dir):
     processed_count = 0
     updated_count = 0
+    skipped_count = 0
+
+    # it turns out that node_modules can contain a lot of markdown files
+    # TODO: make this configurable
+    skip_dirs = {
+        'node_modules',
+        '.git',
+        '.obsidian',
+        '__pycache__',
+        'venv',
+        '.venv'
+    }
 
     root_path = Path(root_dir)
     for filepath in root_path.rglob("*"):
+        # skip all hidden directories
+        if any(part.startswith('.') for part in filepath.parts):
+            skipped_count += 1
+            continue
+
+        # skip the skip_dirs
+        if any(skip_dir in filepath.parts for skip_dir in skip_dirs):
+            skipped_count += 1
+            continue
+
         if filepath.suffix.lower() in (".md", ".markdown"):
             processed_count += 1
 
@@ -73,6 +95,7 @@ def process_markdown_files(root_dir):
     print("\nProcessing complete")
     print(f"Total files processed: {processed_count}")
     print(f"Files updated: {updated_count}")
+    print(f"Files/directories skipped: {skipped_count}")
 
 
 @app.command()
