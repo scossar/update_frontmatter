@@ -40,7 +40,7 @@ def add_or_update_front_matter(content, file_id):
 
     if front_matter is not None:
         new_front_matter = f"file_id: {file_id}\n{front_matter}"
-        return f"---\n{new_front_matter}---\n{rest_of_content}"
+        return f"---\n{new_front_matter}\n---\n{rest_of_content}"
     else:
         return f"---\nfile_id: {file_id}\n---\n\n{content}"
 
