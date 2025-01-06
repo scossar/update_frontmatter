@@ -8,4 +8,4 @@ file_id: file_name_20250104_180300_5e9d
 ---
 ```
 
-NOTE: I developed the plugin for my own use. It's not heavily tested and is probably best understood to be example code.
+NOTE: I developed the plugin for my own use. It needs some tests added to it before I'd be comfortable recommending it to others. If you do use it, backup your files first.
